@@ -11,6 +11,9 @@ import jdk.jfr.Label;
 import static jdk.jfr.Timespan.MILLISECONDS;
 import static jdk.jfr.Timespan.NANOSECONDS;
 
+/**
+ * A {@link IMetricsTracker} that generates JFR events.
+ */
 final class JFRMetricsTracker implements IMetricsTracker {
 
   private static final String CATEGORY = "HikariCP";
@@ -53,7 +56,7 @@ final class JFRMetricsTracker implements IMetricsTracker {
   }
 
   @Label("Connection Created")
-  @Description("A physical JDBC connection was created")
+  @Description("A physical connection was created")
   @Category(CATEGORY)
   static final class ConnectionCreatedEvent extends Event {
 
@@ -62,7 +65,7 @@ final class JFRMetricsTracker implements IMetricsTracker {
     private String poolName;
 
     @Label("Creation Time")
-    @Description("The time it took to create a connection")
+    @Description("The time it took to create a physical connection")
     @Timespan(MILLISECONDS)
     private long creationTime;
 
@@ -82,7 +85,7 @@ final class JFRMetricsTracker implements IMetricsTracker {
   static final class ConnectionAcquiredEvent extends Event {
 
     @Label("Pool Name")
-    @Description("The name of the connection pool")
+    @Description("The name of the pool the connection was acquired from")
     private String poolName;
 
     @Label("Acquisition Time")
@@ -106,11 +109,11 @@ final class JFRMetricsTracker implements IMetricsTracker {
   static final class ConnectionBorrowedEvent extends Event {
 
     @Label("Pool Name")
-    @Description("The name of the connection pool")
+    @Description("The name of the pool the connection was borrowed from")
     private String poolName;
 
     @Label("Borrowed Time")
-    @Description("The time the connection was from the pool")
+    @Description("The time the connection was borrowed from the pool")
     @Timespan(MILLISECONDS)
     private long borrowedTime;
 
@@ -130,7 +133,7 @@ final class JFRMetricsTracker implements IMetricsTracker {
   static final class ConnectionTimeoutEvent extends Event {
 
     @Label("Pool Name")
-    @Description("The name of the connection pool")
+    @Description("The name of the pool the connection was requested from")
     private String poolName;
 
     void setPoolName(String poolName) {
