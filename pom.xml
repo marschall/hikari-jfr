@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.github.marschall</groupId>
   <artifactId>hikari-jfr</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.1-SNAPSHOT</version>
   <inceptionYear>2023</inceptionYear>
   <name>Hikari JFR</name>
   <description>A HikariCP MetricsTrackerFactory that generates JFR events.</description>
@@ -14,7 +14,7 @@
     <connection>scm:git:git@github.com:marschall/hikari-jfr.git</connection>
     <developerConnection>scm:git:git@github.com:marschall/hikari-jfr.git</developerConnection>
     <url>${project.url}</url>
-    <tag>1.0.0</tag>
+    <tag>HEAD</tag>
   </scm>
 
   <developers>
