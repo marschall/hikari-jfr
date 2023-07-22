@@ -1,4 +1,4 @@
-Hikari JFR [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.marschall/jfr-jdbctemplate/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.marschall/jfr-jdbctemplate) [![Javadocs](https://www.javadoc.io/badge/com.github.marschall/jfr-jdbctemplate.svg)](https://www.javadoc.io/doc/com.github.marschall/jfr-jdbctemplate)
+Hikari JFR [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.marschall/hikari-jfr/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.marschall/hikari-jfr) [![Javadocs](https://www.javadoc.io/badge/com.github.marschall/hikari-jfr.svg)](https://www.javadoc.io/doc/com.github.marschall/hikari-jfr)
 ==========
 
 A HikariCP MetricsTrackerFactory that generates JFR events.
@@ -14,7 +14,7 @@ Usage
 <dependency>
   <groupId>com.github.marschall</groupId>
   <artifactId>hikari-jfr</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.1</version>
 </dependency>
 ```
 
