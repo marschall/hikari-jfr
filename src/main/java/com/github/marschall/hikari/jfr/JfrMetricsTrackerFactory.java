@@ -12,7 +12,7 @@ public final class JfrMetricsTrackerFactory implements MetricsTrackerFactory {
 
   @Override
   public IMetricsTracker create(String poolName, PoolStats poolStats) {
-    return new JFRMetricsTracker(poolName);
+    return new JFRMetricsTracker(poolName, poolStats);
   }
 
 }

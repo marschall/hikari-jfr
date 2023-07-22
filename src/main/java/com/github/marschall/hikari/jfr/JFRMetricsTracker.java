@@ -1,15 +1,17 @@
 package com.github.marschall.hikari.jfr;
 
-import jdk.jfr.Timespan;
+import static jdk.jfr.Timespan.MILLISECONDS;
+import static jdk.jfr.Timespan.NANOSECONDS;
 
 import com.zaxxer.hikari.metrics.IMetricsTracker;
+import com.zaxxer.hikari.metrics.PoolStats;
 
 import jdk.jfr.Category;
 import jdk.jfr.Description;
 import jdk.jfr.Event;
 import jdk.jfr.Label;
-import static jdk.jfr.Timespan.MILLISECONDS;
-import static jdk.jfr.Timespan.NANOSECONDS;
+import jdk.jfr.StackTrace;
+import jdk.jfr.Timespan;
 
 /**
  * A {@link IMetricsTracker} that generates JFR events.
@@ -63,10 +65,25 @@ final class JFRMetricsTracker implements IMetricsTracker {
 
   private static final String CATEGORY = "HikariCP";
 
-  private String poolName;
+  private final String poolName;
 
-  JFRMetricsTracker(String poolName) {
+  private final PoolStats poolStats;
+
+  JFRMetricsTracker(String poolName, PoolStats poolStats) {
     this.poolName = poolName;
+    this.poolStats = poolStats;
+  }
+
+  private void recordPoolStats() {
+    PoolStatsEvent event = new PoolStatsEvent();
+    event.setPoolName(this.poolName);
+    event.setActiveConnections(this.poolStats.getActiveConnections());
+    event.setIdleConnections(this.poolStats.getIdleConnections());
+    event.setMaxConnections(this.poolStats.getMaxConnections());
+    event.setMinConnections(this.poolStats.getMinConnections());
+    event.setPendingThreads(this.poolStats.getPendingThreads());
+    event.setTotalConnections(this.poolStats.getTotalConnections());
+    event.commit();
   }
 
   @Override
@@ -75,6 +92,8 @@ final class JFRMetricsTracker implements IMetricsTracker {
     event.setPoolName(this.poolName);
     event.setCreationTime(connectionCreatedMillis);
     event.commit();
+
+    this.recordPoolStats();
   }
 
   @Override
@@ -83,6 +102,8 @@ final class JFRMetricsTracker implements IMetricsTracker {
     event.setPoolName(this.poolName);
     event.setAcquisitionTime(elapsedAcquiredNanos);
     event.commit();
+
+    this.recordPoolStats();
   }
 
   @Override
@@ -91,6 +112,8 @@ final class JFRMetricsTracker implements IMetricsTracker {
     event.setPoolName(this.poolName);
     event.setBorrowedTime(elapsedBorrowedMillis);
     event.commit();
+
+    this.recordPoolStats();
   }
 
   @Override
@@ -98,6 +121,8 @@ final class JFRMetricsTracker implements IMetricsTracker {
     ConnectionTimeoutEvent event = new ConnectionTimeoutEvent();
     event.setPoolName(this.poolName);
     event.commit();
+
+    this.recordPoolStats();
   }
 
   @Label("Connection Created")
@@ -183,6 +208,70 @@ final class JFRMetricsTracker implements IMetricsTracker {
 
     void setPoolName(String poolName) {
       this.poolName = poolName;
+    }
+
+  }
+
+  @Label("Pool Stats")
+  @Description("Statistics about a pool")
+  @Category(CATEGORY)
+  @StackTrace(false)
+  static final class PoolStatsEvent extends Event {
+
+    @Label("Pool Name")
+    @Description("The name of the pool the stats are about")
+    private String poolName;
+
+    @Label("Total Connections")
+    @Description("The total number of connections in the pool")
+    private int totalConnections;
+
+    @Label("Idle Connections")
+    @Description("The number of idle connections in the pool")
+    private int idleConnections;
+
+    @Label("Active Connections")
+    @Description("The number of active connections in the pool")
+    private int activeConnections;
+
+    @Label("Pending Threads")
+    @Description("The number of pending threads")
+    private int pendingThreads;
+
+    @Label("Max Connections")
+    @Description("The maximum number of connections in the pool")
+    private int maxConnections;
+
+    @Label("Min Connections")
+    @Description("The minimum number of connections in the pool")
+    private int minConnections;
+
+    void setPoolName(String poolName) {
+      this.poolName = poolName;
+    }
+
+    void setTotalConnections(int totalConnections) {
+      this.totalConnections = totalConnections;
+    }
+
+    void setIdleConnections(int idleConnections) {
+      this.idleConnections = idleConnections;
+    }
+
+    void setActiveConnections(int activeConnections) {
+      this.activeConnections = activeConnections;
+    }
+
+    void setPendingThreads(int pendingThreads) {
+      this.pendingThreads = pendingThreads;
+    }
+
+    void setMaxConnections(int maxConnections) {
+      this.maxConnections = maxConnections;
+    }
+
+    void setMinConnections(int minConnections) {
+      this.minConnections = minConnections;
     }
 
   }
