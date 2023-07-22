@@ -13,6 +13,51 @@ import static jdk.jfr.Timespan.NANOSECONDS;
 
 /**
  * A {@link IMetricsTracker} that generates JFR events.
+ * 
+ * <h2>Events</h2>
+ * The following events are supported
+ * 
+ * <dl>
+ * 
+ * <dt>Connection Created</dt>
+ * <dd>A physical connection was created. It has the following attributes
+ * <dl>
+ * <dt>Pool Name</dt>
+ * <dd>The name of the connection pool</dd>
+ * <dt>Creation Time</dt>
+ * <dd>The time it took to create a physical connection</dd>
+ * </dl>
+ * </dd>
+ * 
+ * <dt>Connection Acquired</dt>
+ * <dd>A connection was acquired from the pool. It has the following attributes
+ * <dl>
+ * <dt>Pool Name</dt>
+ * <dd>The name of the connection pool</dd>
+ * <dt>Acquisition Time</dt>
+ * <dd>The time it took to acquire a connection from the pool</dd>
+ * </dl>
+ * </dd>
+ * 
+ * <dt>Connection Borrowed</dt>
+ * <dd>A connection was borrowed from the pool. It has the following attributes
+ * <dl>
+ * <dt>Pool Name</dt>
+ * <dd>The name of the connection pool</dd>
+ * <dt>Borrowed Time</dt>
+ * <dd>The time the connection was borrowed from the pool</dd>
+ * </dl>
+ * </dd>
+ * 
+ * <dt>Connection Timeout</dt>
+ * <dd>A could not be acquired in the request time from the pool. It has the following attributes
+ * <dl>
+ * <dt>Pool Name</dt>
+ * <dd>The name of the connection pool</dd>
+ * </dl>
+ * </dd>
+ * 
+ * </dl>
  */
 final class JFRMetricsTracker implements IMetricsTracker {
 

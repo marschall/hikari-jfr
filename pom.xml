@@ -151,7 +151,7 @@
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
         <configuration>
-          <argLine>--add-opens com.github.marschall.hikari.jfr/com.github.marschall.hikari.jfr=ALL-UNNAMED</argLine>
+          <forkCount>0</forkCount>
         </configuration>
       </plugin>
       <plugin>
