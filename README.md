@@ -44,7 +44,6 @@ The following events are supported
 <dt>Creation Time</dt>
 <dd>The time it took to create a physical connection</dd>
 </dl>
-</dd>
 
 <dt>Connection Acquired</dt>
 <dd>A connection was acquired from the pool. It has the following attributes
@@ -54,7 +53,6 @@ The following events are supported
 <dt>Acquisition Time</dt>
 <dd>The time it took to acquire a connection from the pool</dd>
 </dl>
-</dd>
 
 <dt>Connection Borrowed</dt>
 <dd>A connection was borrowed from the pool. It has the following attributes
@@ -64,7 +62,6 @@ The following events are supported
 <dt>Borrowed Time</dt>
 <dd>The time the connection was borrowed from the pool</dd>
 </dl>
-</dd>
 
 <dt>Connection Timeout</dt>
 <dd>A could not be acquired in the request time from the pool. It has the following attributes
@@ -72,7 +69,59 @@ The following events are supported
 <dt>Pool Name</dt>
 <dd>The name of the connection pool</dd>
 </dl>
-</dd>
+
+<dt>Pool Stats</dt>
+<dd>Statistics about a pool. It has the following attributes
+<dl>
+<dt>Pool Name</dt>
+<dd>The name of the pool the statistics are about</dd>
+<dt>Total Connections</dt>
+<dd>The total number of connections in the pool</dd>
+<dt>Idle Connections</dt>
+<dd>The number of idle connections in the pool</dd>
+<dt>Active Connections</dt>
+<dd>The number of active connections in the pool</dd>
+<dt>Pending Threads</dt>
+<dd>The number of pending threads</dd>
+<dt>Max Connections</dt>
+<dd>The maximum number of connections in the pool</dd>
+<dt>Min Connections</dt>
+<dd>The minimum number of connections in the pool</dd>
+</dl>
 
 </dl>
 
+
+Command Line
+------------
+
+```sh
+$jfr print --events "com.github.marschall.hikari.jfr.*" target/unit-tests.jfr
+
+com.github.marschall.hikari.jfr.JFRMetricsTracker$ConnectionBorrowedEvent {
+  startTime = 09:37:47.114 (2026-02-06)
+  poolName = "HikariPool-1"
+  borrowedTime = 23.0 ms
+  eventThread = "main" (javaThreadId = 3)
+  stackTrace = [
+    com.github.marschall.hikari.jfr.JFRMetricsTracker.recordConnectionUsageMillis(long) line: 131
+    com.zaxxer.hikari.pool.PoolBase$MetricsTrackerDelegate.recordConnectionUsage(PoolEntry) line: 753
+    com.zaxxer.hikari.pool.HikariPool.recycle(PoolEntry) line: 436
+    com.zaxxer.hikari.pool.PoolEntry.recycle() line: 81
+    com.zaxxer.hikari.pool.ProxyConnection.close() line: 268
+    ...
+  ]
+}
+
+com.github.marschall.hikari.jfr.JFRMetricsTracker$PoolStatsEvent {
+  startTime = 09:37:47.114 (2026-02-06)
+  poolName = "HikariPool-1"
+  totalConnections = 1
+  idleConnections = 0
+  activeConnections = 1
+  pendingThreads = 0
+  maxConnections = 2
+  minConnections = 2
+  eventThread = "main" (javaThreadId = 3)
+}
+````

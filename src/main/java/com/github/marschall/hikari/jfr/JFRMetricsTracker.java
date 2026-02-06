@@ -29,7 +29,6 @@ import jdk.jfr.Timespan;
  * <dt>Creation Time</dt>
  * <dd>The time it took to create a physical connection</dd>
  * </dl>
- * </dd>
  * 
  * <dt>Connection Acquired</dt>
  * <dd>A connection was acquired from the pool. It has the following attributes
@@ -39,7 +38,6 @@ import jdk.jfr.Timespan;
  * <dt>Acquisition Time</dt>
  * <dd>The time it took to acquire a connection from the pool</dd>
  * </dl>
- * </dd>
  * 
  * <dt>Connection Borrowed</dt>
  * <dd>A connection was borrowed from the pool. It has the following attributes
@@ -49,7 +47,6 @@ import jdk.jfr.Timespan;
  * <dt>Borrowed Time</dt>
  * <dd>The time the connection was borrowed from the pool</dd>
  * </dl>
- * </dd>
  * 
  * <dt>Connection Timeout</dt>
  * <dd>A could not be acquired in the request time from the pool. It has the following attributes
