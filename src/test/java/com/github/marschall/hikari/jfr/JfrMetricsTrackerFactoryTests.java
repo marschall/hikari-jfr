@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.concurrent.TimeUnit;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
@@ -16,9 +17,6 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
 class JfrMetricsTrackerFactoryTests {
-
-  @RegisterExtension
-  static final JfrRecordingExtension JFR_RECORDING_EXTENSION = new JfrRecordingExtension();
 
   private HikariDataSource dataSource;
 
@@ -31,7 +29,8 @@ class JfrMetricsTrackerFactoryTests {
     hikariConfig.setConnectionTimeout(TimeUnit.SECONDS.toMillis(2L));
     dataSource = new HikariDataSource(hikariConfig);
   }
-  
+
+  @AfterEach
   void afterEach() {
     this.dataSource.close();
   }

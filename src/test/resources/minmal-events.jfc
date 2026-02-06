@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration version="2.0" label="Only HikariCP and JUnit events." provider="com.github.marschall">
+
+  <event name="com.github.marschall.hikari.jfr.JFRMetricsTracker$ConnectionCreatedEvent">
+    <setting name="enabled">true</setting>
+  </event>
+
+  <event name="com.github.marschall.hikari.jfr.JFRMetricsTracker.ConnectionAcquiredEvent">
+    <setting name="enabled">true</setting>
+  </event>
+
+  <event name="com.github.marschall.hikari.jfr.JFRMetricsTracker.ConnectionBorrowedEvent">
+    <setting name="enabled">true</setting>
+  </event>
+
+  <event name="com.github.marschall.hikari.jfr.JFRMetricsTracker.ConnectionTimeoutEvent">
+    <setting name="enabled">true</setting>
+  </event>
+
+  <event name="com.github.marschall.hikari.jfr.JFRMetricsTracker.PoolStatsEvent">
+    <setting name="enabled">true</setting>
+  </event>
+
+  <event name="org.junit.TestExecution">
+    <setting name="enabled">true</setting>
+  </event>
+
+  <event name="org.junit.TestPlanExecution">
+    <setting name="enabled">true</setting>
+  </event>
+
+</configuration>

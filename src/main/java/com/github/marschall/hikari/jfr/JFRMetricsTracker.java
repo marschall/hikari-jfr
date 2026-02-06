@@ -57,9 +57,26 @@ import jdk.jfr.Timespan;
  * <dt>Pool Name</dt>
  * <dd>The name of the connection pool</dd>
  * </dl>
- * </dd>
  * 
+ * <dt>Pool Stats</dt>
+ * <dd>Statistics about a pool. It has the following attributes
+ * <dl>
+ * <dt>Pool Name</dt>
+ * <dd>The name of the pool the statistics are about</dd>
+ * <dt>Total Connections</dt>
+ * <dd>The total number of connections in the pool</dd>
+ * <dt>Idle Connections</dt>
+ * <dd>The number of idle connections in the pool</dd>
+ * <dt>Active Connections</dt>
+ * <dd>The number of active connections in the pool</dd>
+ * <dt>Pending Threads</dt>
+ * <dd>The number of pending threads</dd>
+ * <dt>Max Connections</dt>
+ * <dd>The maximum number of connections in the pool</dd>
+ * <dt>Min Connections</dt>
+ * <dd>The minimum number of connections in the pool</dd>
  * </dl>
+ * </dd>
  */
 final class JFRMetricsTracker implements IMetricsTracker {
 
@@ -219,7 +236,7 @@ final class JFRMetricsTracker implements IMetricsTracker {
   static final class PoolStatsEvent extends Event {
 
     @Label("Pool Name")
-    @Description("The name of the pool the stats are about")
+    @Description("The name of the pool the dtatistics are about")
     private String poolName;
 
     @Label("Total Connections")
