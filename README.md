@@ -1,4 +1,4 @@
-Hikari JFR [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.marschall/hikari-jfr/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.marschall/hikari-jfr) [![Javadocs](https://www.javadoc.io/badge/com.github.marschall/hikari-jfr.svg)](https://www.javadoc.io/doc/com.github.marschall/hikari-jfr)
+Hikari JFR [![Maven Central](https://img.shields.io/maven-central/v/com.github.marschall/hikari-jfr?color=31c653&label=maven%20central)](https://central.sonatype.com/artifact/com.github.marschall/hikari-jfr) [![Javadocs](https://www.javadoc.io/badge/com.github.marschall/hikari-jfr.svg)](https://www.javadoc.io/doc/com.github.marschall/hikari-jfr)
 ==========
 
 A HikariCP MetricsTrackerFactory that generates JFR events.
