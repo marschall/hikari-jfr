@@ -124,7 +124,9 @@
         <configuration>
           <links>
             <link>https://docs.oracle.com/en/java/javase/11/docs/api/</link>
+            <!--
             <link>https://javadoc.io/doc/com.zaxxer/HikariCP/latest/</link>
+            -->
           </links>
           <notimestamp>true</notimestamp>
         </configuration>
@@ -153,14 +155,9 @@
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
         <configuration>
-          <!--
-            prevent JFR from logging to stdout [0.242s][info   ][jfr,startup] Use jcmd 88403 JFR.dump name=1 to copy recording data to file.
-            https://bugs.openjdk.org/browse/JDK-8244190
-           -->
           <argLine>
             -XX:StartFlightRecording:filename=${project.build.directory}/unit-tests.jfr,dumponexit=true,maxsize=5m,settings=${project.basedir}/src/test/resources/minmal-events.jfc
             -XX:FlightRecorderOptions:stackdepth=192
-            -Xlog:jfr+startup=error
             --add-reads com.github.marschall.hikari.jfr=java.sql
           </argLine>
          </configuration>
@@ -259,6 +256,31 @@
   </build>
 
   <profiles>
+    <profile>
+      <id>jdk-17-plus</id>
+      <activation>
+        <jdk>[17</jdk>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <configuration>
+              <!--
+                prevent JFR from logging to stdout [0.242s][info   ][jfr,startup] Use jcmd 88403 JFR.dump name=1 to copy recording data to file.
+                https://bugs.openjdk.org/browse/JDK-8244190
+               -->
+              <argLine>
+                -XX:StartFlightRecording:filename=${project.build.directory}/unit-tests.jfr,dumponexit=true,maxsize=5m,settings=${project.basedir}/src/test/resources/minmal-events.jfc
+                -XX:FlightRecorderOptions:stackdepth=192
+                -Xlog:jfr+startup=error
+                --add-reads com.github.marschall.hikari.jfr=java.sql
+              </argLine>
+             </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
     <profile>
       <id>deploy-to-sonatype-oss</id>
       <build>
