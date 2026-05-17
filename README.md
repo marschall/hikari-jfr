@@ -125,3 +125,10 @@ com.github.marschall.hikari.jfr.JFRMetricsTracker$PoolStatsEvent {
   eventThread = "main" (javaThreadId = 3)
 }
 ````
+
+
+Combining with other Metrics Trackers
+-------------------------------------
+
+We offer `CompositeMetricsTrackerFactory` if you want to combine this with other metrics trackers, ie. Micrometer or Prometheus.
+
