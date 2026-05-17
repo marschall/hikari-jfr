@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.github.marschall</groupId>
   <artifactId>hikari-jfr</artifactId>
-  <version>1.1.0</version>
+  <version>1.1.1-SNAPSHOT</version>
   <inceptionYear>2023</inceptionYear>
   <name>Hikari JFR</name>
   <description>A HikariCP MetricsTrackerFactory that generates JFR events.</description>
@@ -303,7 +303,7 @@
 
   <properties>
     <maven.compiler.release>11</maven.compiler.release>
-    <project.build.outputTimestamp>2026-05-17T16:49:46Z</project.build.outputTimestamp>
+    <project.build.outputTimestamp>2026-05-17T17:28:13Z</project.build.outputTimestamp>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
   </properties>
