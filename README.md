@@ -14,7 +14,7 @@ Usage
 <dependency>
   <groupId>com.github.marschall</groupId>
   <artifactId>hikari-jfr</artifactId>
-  <version>1.0.2</version>
+  <version>1.1.0</version>
 </dependency>
 ```
 
